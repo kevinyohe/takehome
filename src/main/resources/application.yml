@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+name: test-YAML
+providers:
+  - name: provider1
+    url: http://provider1.com/v1/api/account/validate
+  - name: provider2
+    url: http://provider2.com/v2/api/account/validate
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+name: prod-YAML
+providers:
+  - name: provider1
+    url: http://provider1.com/v1/api/account/validate
+  - name: provider2
+    url: http://provider2.com/v2/api/account/validate
+  - name: provider22
+    url: http://provider22.com/v2/api/account/validate
