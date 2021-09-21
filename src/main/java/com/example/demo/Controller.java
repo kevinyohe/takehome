@@ -23,10 +23,7 @@ public class Controller {
 
     @PostMapping(path = "/validate", produces = MediaType.APPLICATION_JSON_VALUE)
     public ValidationResponse validate22(@Valid @RequestBody ValidationRequest validationRequest){
-        System.out.println(validationRequest.accountNumber);
-        if (validationRequest.providers != null){
-            System.out.println("got providers from rest: " + validationRequest.providers);
-        }
+
         if (validationRequest.providers != null) {
             providerRestService.getResponse(validationRequest.accountNumber, validationRequest.providers);
             ValidationResponse validationResponse = new ValidationResponse();

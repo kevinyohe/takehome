@@ -1,8 +1,6 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +16,7 @@ import java.util.*;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix="providers")
-public class ProviderRestService implements CommandLineRunner {
+public class ProviderRestService {
 
     @Autowired
     private ProviderConfig providerConfig;
@@ -48,7 +46,7 @@ public class ProviderRestService implements CommandLineRunner {
 
     public List<ProviderResponse> getAll(String account){
         List<ProviderResponse> listResponses2 = new ArrayList<>();
-        //for
+
         for (Map<String, String> entry: providerConfig.getProviders()){
             System.out.println(entry);
             boolean reply = this.callRestService(account, entry.get("url"));
@@ -72,20 +70,16 @@ public class ProviderRestService implements CommandLineRunner {
 
         RestTemplate restTemplate = new RestTemplate();
         //restTemplate.getForObject("http://localhost:80", String response);
-        System.out.println("will use " + url + " and " + account);
         try {
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
             System.out.println(response);
+            // parse response from endpoints
         } catch (Exception e){
             System.out.println("Exception on validation: " + e);
         }
         return false;
     }
 
-    @Override
-    public void run(String... args) {
-        System.out.println("delete me");
-    }
 
 
 }

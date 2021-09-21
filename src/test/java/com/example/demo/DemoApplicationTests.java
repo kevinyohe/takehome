@@ -15,11 +15,6 @@ class DemoApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    void contextLoads2() {
-        assert 1 == 1;
-        System.out.println("DID IT");
-    }
 
     @Test
     void CreateValidationRequest(){
@@ -42,8 +37,14 @@ class DemoApplicationTests {
     @Test
     void TestProviderRestService(){
         ProviderRestService a = new ProviderRestService();
+        a.callRestService("1234", "http://localhost:80/api");
+    }
+    @Test
+    void TestProviderResponse(){
         ProviderResponse pR = new ProviderResponse();
-
-
+        pR.setValid(true);
+        assert pR.isValid() == true;
+        pR.setValid(false);
+        assert pR.isValid() == false;
     }
 }

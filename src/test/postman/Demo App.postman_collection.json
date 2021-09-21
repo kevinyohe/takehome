@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "9e9313d9-1b0f-4f56-9c1c-9210dbf06ac6",
+		"name": "Demo App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"success status\", () => pm.response.to.be.ok );\r",
+							"pm.test(\"reponse1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].valid).to.equal(false));\r",
+							"pm.test(\"reponse2 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[1].valid).to.equal(false));\r",
+							"pm.test(\"provider1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].providerName).to.equal(\"provider1\"));\r",
+							"pm.test(\"provider2 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[1].providerName).to.equal(\"provider2\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"providers\": [\r\n        \"provider1\",\r\n        \"provider2\"\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Only provider1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"success status\", () => pm.response.to.be.ok );\r",
+							"pm.test(\"reponse1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].valid).to.equal(false));\r",
+							"pm.test(\"provider1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].providerName).to.equal(\"provider1\"));\r",
+							"pm.test(\"provider1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0]).length === 1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"providers\": [\r\n        \"provider1\"\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Only provider2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"success status\", () => pm.response.to.be.ok );\r",
+							"pm.test(\"reponse1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].valid).to.equal(false));\r",
+							"pm.test(\"provider2 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].providerName).to.equal(\"provider2\"));\r",
+							"pm.test(\"provider1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0]).length === 1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"providers\": [\r\n        \"provider2\"\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Only account provided",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"success status\", () => pm.response.to.be.ok );\r",
+							"pm.test(\"reponse1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].valid).to.equal(false));\r",
+							"pm.test(\"provider1 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[0].providerName).to.equal(\"provider1\"));\r",
+							"pm.test(\"provider2 is correct\", () => \r",
+							"pm.expect(pm.response.json().result[1].providerName).to.equal(\"provider2\"));\r",
+							"pm.test(\"all providers were used\", () => \r",
+							"pm.expect(pm.response.json().result[0]).length === 3);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": \"123456\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Missing account number returns error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Bad Request\", () => pm.response.to.be.badRequest );\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"zzz\": \"123456\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
